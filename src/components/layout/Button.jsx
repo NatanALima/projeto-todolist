@@ -1,14 +1,13 @@
 import PropTypes from 'prop-types';
 
-export default function Button({iconBtn, handleAction}) {
-    console.log(handleAction);
+export default function Button({icone, handleClick}) {
     return(
-        <button>{iconBtn}</button>
+        <button onClick={handleClick}>{icone}</button>
     )
 }
 
 
 Button.propTypes = {
-    iconBtn: PropTypes.element,
-    handleAction: PropTypes.func
+    icone: PropTypes.element,
+    handleClick: PropTypes.func
 }

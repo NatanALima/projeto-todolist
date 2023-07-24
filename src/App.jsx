@@ -7,7 +7,7 @@ function App() {
     <main>
       <h1>To do List</h1>
       <InputContainer/>
-      <ButtonCollection/>
+      <ButtonCollection typeBtnSelect={"default"}/>
     </main>
   )
 }
