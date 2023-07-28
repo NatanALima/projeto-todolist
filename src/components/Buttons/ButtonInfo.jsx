@@ -29,12 +29,11 @@ export default function ButtonInfo({btnSelect, typeBtnSelect, setIsDisabled}) {
     }
 
     const selectedBtnInfo = getBtnInfo();
-    console.log(selectedBtnInfo);
 
     return(
         <>
-            <Button icone={selectedBtnInfo.icon} handleClick={selectedBtnInfo.handleClick}/>
-            {isClicked ? <ButtonCollection typeBtnSelect={typeBtnSelect} setIsDisabled={setIsDisabled}/> : null}
+            <Button icone={selectedBtnInfo.icon} handleClick={selectedBtnInfo.handleClick} isCollection={false}/>
+            {isClicked ? <ButtonCollection typeBtnSelect={typeBtnSelect} setIsDisabled={setIsDisabled} isActive={isClicked}/> : null}
             
         </>
     )

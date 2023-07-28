@@ -1,10 +1,17 @@
 import { useState } from "react";
+import { styled } from "styled-components";
 import Button from "../layout/Button";
 import PropTypes from 'prop-types';
 import {FaCheck, FaCheckDouble, FaPen, FaTrash} from 'react-icons/fa';
 import {FaArrowRotateLeft, FaX} from 'react-icons/fa6';
 
-export default function ButtonCollection({typeBtnSelect, setIsDisabled}) {
+    const ContainerBtnWrapper = styled.div`
+        position: absolute;
+        right: 0;
+    `;
+    console.log(ContainerBtnWrapper);
+
+export default function ButtonCollection({typeBtnSelect, setIsDisabled, isActive}) {
     const [typeSelect, setTypeSelect] = useState(typeBtnSelect || "default");
 
     const handleClickChecked = () => {
@@ -79,7 +86,6 @@ export default function ButtonCollection({typeBtnSelect, setIsDisabled}) {
     // Pegando as informações dos botões e passando-as para um array para que seja percorrido, posteriormente, por um map
     const getPropsCollection = (btnSelect) => {
         const propsCollect = getInfoCollectionBtn(btnSelect);
-        console.log(propsCollect);
         const propsValue = Object.values(propsCollect[0]);
         return propsValue;
     }
@@ -89,15 +95,16 @@ export default function ButtonCollection({typeBtnSelect, setIsDisabled}) {
     
 
     return (
-        <>
-            {PropsCollection.map((info, index) => (<Button key={index} {...info}/>))}
+        <ContainerBtnWrapper>
+            {PropsCollection.map((info, index) => (<Button key={index} {...info} isCollection={true} isActive={isActive}/>))}
             
-        </>
+        </ContainerBtnWrapper>
         
     )
 }
 
 ButtonCollection.propTypes = {
     typeBtnSelect: PropTypes.string,
-    setIsDisabled: PropTypes.func
+    setIsDisabled: PropTypes.func,
+    isActive: PropTypes.bool
 }
