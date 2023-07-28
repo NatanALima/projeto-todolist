@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 import {FaCheck, FaCheckDouble, FaPen, FaTrash} from 'react-icons/fa';
 import {FaArrowRotateLeft, FaX} from 'react-icons/fa6';
 
-export default function ButtonCollection({typeBtnSelect}) {
+export default function ButtonCollection({typeBtnSelect, setIsDisabled}) {
     const [typeSelect, setTypeSelect] = useState(typeBtnSelect || "default");
 
     const handleClickChecked = () => {
+        setIsDisabled(true);
         return "Cliquei no ADD";
     }
 
@@ -18,6 +19,7 @@ export default function ButtonCollection({typeBtnSelect}) {
 
     const handleClickReturn = () => {
         setTypeSelect("default");
+        setIsDisabled(true);
         return "Retornando para a coleção selecionada"
 
     }
@@ -25,6 +27,7 @@ export default function ButtonCollection({typeBtnSelect}) {
     // Quase todos os botões da coleção de edições
     const handleClickEdit = () => {
         setTypeSelect("editList");
+        setIsDisabled(false);
         return "Cliquei no Edit. Agora um novo menu se abriu";
 
     }
@@ -38,13 +41,6 @@ export default function ButtonCollection({typeBtnSelect}) {
     const handleClickUnchecked = () => {
         return "Desfazendo a tarefa";
     }
-
-    
-    
-
-    
-
-
 
     // Nesta função eu verifico qual coleção será utilizada
     // Ela receberá o parâmetro com nome da coleção para ser utilizado no Filter
@@ -102,5 +98,6 @@ export default function ButtonCollection({typeBtnSelect}) {
 }
 
 ButtonCollection.propTypes = {
-    typeBtnSelect: PropTypes.string
+    typeBtnSelect: PropTypes.string,
+    setIsDisabled: PropTypes.func
 }
