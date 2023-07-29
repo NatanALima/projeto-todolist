@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
+import {rotate, fadeInBtn} from './Animation';
 import { styled } from 'styled-components';
+import { useState } from 'react';
 
     const ButtonWrapper = styled.button`
         display: flex;
@@ -22,24 +24,21 @@ import { styled } from 'styled-components';
 
     // PENDENTE
     const BtnCollectionWrapper = styled(ButtonWrapper)`
+        margin: 10px 0;
         position: absolute;
-        top: -19px;
-        left: -52px;
-
-        ${props => props.$isActive &&
-          `
-          left: 0;
-          transform: rotate(calc(360deg / 8 * ${props.$cssPosition}));
-          transform-origin: 80px;
-          opacity: 1;`};
-    `
+        transition: .3s ease;
+        animation: ${props => fadeInBtn(props.$yPosition+"%")} .3s ease forwards;
+        
+    `;
 
     //console.log(ButtonWrapper);
 export default function Button({icone, handleClick, isCollection, isActive, cssPosition}) {
+    const [yPosition, setYPosition] = useState(-120);
+
     return(
         <>
             {!isCollection ? <ButtonWrapper onClick={handleClick}>{icone}</ButtonWrapper>:
-                             <BtnCollectionWrapper onClick={handleClick} $isActive={isActive} $cssPosition={cssPosition}>{icone}</BtnCollectionWrapper>}
+                             <BtnCollectionWrapper onClick={handleClick} $yPosition={-120}>{icone}</BtnCollectionWrapper>}
             
         </>
     )
@@ -50,6 +49,5 @@ Button.propTypes = {
     icone: PropTypes.element,
     handleClick: PropTypes.func,
     isCollection: PropTypes.bool,
-    isActive: PropTypes.bool,
-    cssPosition: PropTypes.number
+    isActive: PropTypes.bool
 }

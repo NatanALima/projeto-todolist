@@ -6,8 +6,9 @@ import {FaCheck, FaCheckDouble, FaPen, FaTrash} from 'react-icons/fa';
 import {FaArrowRotateLeft, FaX} from 'react-icons/fa6';
 
     const ContainerBtnWrapper = styled.div`
-        position: absolute;
-        right: 0;
+        position: relative;
+        display: flex;
+        align-items: center;
     `;
     console.log(ContainerBtnWrapper);
 
@@ -96,7 +97,7 @@ export default function ButtonCollection({typeBtnSelect, setIsDisabled, isActive
 
     return (
         <ContainerBtnWrapper>
-            {PropsCollection.map((info, index) => (<Button key={index} {...info} isCollection={true} isActive={isActive} cssPosition={index+1}/>))}
+            {PropsCollection.map((info, index) => (<Button key={index} {...info} isCollection={true} isActive={isActive}/>))}
             
         </ContainerBtnWrapper>
         
