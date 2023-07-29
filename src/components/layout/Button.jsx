@@ -25,12 +25,23 @@ import { styled } from 'styled-components';
         position: absolute;
         top: -19px;
         left: -52px;
-        z-index: ${props => console.log(props.$active)};
+
+        ${props => props.$isActive &&
+          `
+          left: 0;
+          transform: rotate(calc(360deg / 8 * ${props.$cssPosition}));
+          transform-origin: 80px;
+          opacity: 1;`};
     `
-export default function Button({icone, handleClick, isCollection, isActive}) {
-    console.log(isActive);
+
+    //console.log(ButtonWrapper);
+export default function Button({icone, handleClick, isCollection, isActive, cssPosition}) {
     return(
-        <ButtonWrapper onClick={handleClick} as={isCollection ? BtnCollectionWrapper : null}>{icone}</ButtonWrapper>
+        <>
+            {!isCollection ? <ButtonWrapper onClick={handleClick}>{icone}</ButtonWrapper>:
+                             <BtnCollectionWrapper onClick={handleClick} $isActive={isActive} $cssPosition={cssPosition}>{icone}</BtnCollectionWrapper>}
+            
+        </>
     )
 }
 
@@ -39,5 +50,6 @@ Button.propTypes = {
     icone: PropTypes.element,
     handleClick: PropTypes.func,
     isCollection: PropTypes.bool,
-    isActive: PropTypes.bool
+    isActive: PropTypes.bool,
+    cssPosition: PropTypes.number
 }

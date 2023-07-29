@@ -96,7 +96,7 @@ export default function ButtonCollection({typeBtnSelect, setIsDisabled, isActive
 
     return (
         <ContainerBtnWrapper>
-            {PropsCollection.map((info, index) => (<Button key={index} {...info} isCollection={true} isActive={isActive}/>))}
+            {PropsCollection.map((info, index) => (<Button key={index} {...info} isCollection={true} isActive={isActive} cssPosition={index+1}/>))}
             
         </ContainerBtnWrapper>
         
