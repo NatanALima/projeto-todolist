@@ -10,8 +10,9 @@ export const rotate = keyframes`
     }
 `;
 
-export const fadeInBtn = (yPosition) =>  keyframes`
+export const transitionBtn = (yPosition) =>  keyframes`
     from {
+        z-index: -1;
         opacity: 0;
         left: -2em;
 

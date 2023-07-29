@@ -80,15 +80,20 @@ export default function ButtonCollection({typeBtnSelect, setIsDisabled, isActive
     // Aqui será retornado as informações da coleção de botões (icones e suas respectivas funções)
     const getInfoCollectionBtn = (btnSelect) => {
         const collection = searchCollectionBtn(btnSelect);
-        return collection.map(({collectionBtn}) => ({...collectionBtn}));
+        return collection ? collection.map(({collectionBtn}) => ({...collectionBtn})) : null;
 
     }
 
     // Pegando as informações dos botões e passando-as para um array para que seja percorrido, posteriormente, por um map
     const getPropsCollection = (btnSelect) => {
         const propsCollect = getInfoCollectionBtn(btnSelect);
-        const propsValue = Object.values(propsCollect[0]);
-        return propsValue;
+        if(propsCollect.length) {
+            const propsValue = Object.values(propsCollect[0]);
+            return propsValue;
+        
+        } else {
+            return [];
+        }
     }
 
     const PropsCollection = getPropsCollection(typeSelect);
@@ -97,7 +102,9 @@ export default function ButtonCollection({typeBtnSelect, setIsDisabled, isActive
 
     return (
         <ContainerBtnWrapper>
-            {PropsCollection.map((info, index) => (<Button key={index} {...info} isCollection={true} isActive={isActive}/>))}
+            {PropsCollection.length ? PropsCollection.map((info, index) => (<Button key={index} {...info} isCollection={true} isActive={isActive} cssPosition={index}/>)) :
+                console.log("Não foi possível encontrar a coleção")
+            }
             
         </ContainerBtnWrapper>
         

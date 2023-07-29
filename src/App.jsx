@@ -30,9 +30,23 @@ const MainContainer = styled.main`
   margin-top: 3em;
 `;
 
+const ContainerContent = styled.section`
+  display: flex;
+  margin-bottom: 3em;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+`
+
 const MainTitle = styled.h1`
   font-size: 3em;
 `;
+
+const ContentTitle = styled.h2`
+  font-size: 2em;
+  text-decoration: underline;
+`
 
 function App() {
 
@@ -42,8 +56,14 @@ function App() {
       <MainContainer>
         <MainTitle>To Do List</MainTitle>
         <InputContainer type={"text"} placeholder={"Adicione um novo Texto"} btnSelect={"add"} />
-        <InputContainer type={"text"} disabled={true} btnSelect={"collection"} btnCollection={"default"}/>
-        <InputContainer type={"text"} disabled={true} btnSelect={"collection"} btnCollection={"default"}/>
+        <ContainerContent>
+          <InputContainer type={"text"} disabled={true} btnSelect={"collection"} btnCollection={"default"}/>
+          <InputContainer type={"text"} disabled={true} btnSelect={"collection"} btnCollection={"default"}/>
+        </ContainerContent>
+        <ContainerContent>
+          <ContentTitle>Tarefas Concluídas</ContentTitle>
+          <InputContainer type={"text"} value={"Qualquer coisa"} disabled={true} btnSelect={"collection"} btnCollection={"checked"} isChecked/>
+        </ContainerContent>
       </MainContainer>
     </>
   )

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import {rotate, fadeInBtn} from './Animation';
+import {transitionBtn} from './Animation';
 import { styled } from 'styled-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
     const ButtonWrapper = styled.button`
         display: flex;
@@ -27,18 +27,28 @@ import { useState } from 'react';
         margin: 10px 0;
         position: absolute;
         transition: .3s ease;
-        animation: ${props => fadeInBtn(props.$yPosition+"%")} .3s ease forwards;
+        animation: ${props => (transitionBtn(props.$yPosition+"%"))} ${props => props.$isFadeOut ? "reverse" : "normal"} .3s ease forwards;
         
     `;
 
     //console.log(ButtonWrapper);
 export default function Button({icone, handleClick, isCollection, isActive, cssPosition}) {
-    const [yPosition, setYPosition] = useState(-120);
+    const yPosition = [-120, 0, 120];
+    const [isFadeOut, setIsFadeOut] = useState(0);
+
+    useEffect(() => {
+        if(!isActive) {
+            console.log('achei');
+            setIsFadeOut(true);
+            setTimeout(handleClick, 3000);
+        }
+        return () => setIsFadeOut(0);
+    },[isActive]);
 
     return(
         <>
             {!isCollection ? <ButtonWrapper onClick={handleClick}>{icone}</ButtonWrapper>:
-                             <BtnCollectionWrapper onClick={handleClick} $yPosition={-120}>{icone}</BtnCollectionWrapper>}
+                             <BtnCollectionWrapper onClick={handleClick} $yPosition={yPosition[cssPosition]} $isFadeOut={isFadeOut}>{icone}</BtnCollectionWrapper>}
             
         </>
     )
@@ -49,5 +59,6 @@ Button.propTypes = {
     icone: PropTypes.element,
     handleClick: PropTypes.func,
     isCollection: PropTypes.bool,
-    isActive: PropTypes.bool
+    isActive: PropTypes.bool,
+    cssPosition: PropTypes.number
 }
