@@ -32,23 +32,23 @@ import { useEffect, useState } from 'react';
     `;
 
     //console.log(ButtonWrapper);
-export default function Button({icone, handleClick, isCollection, isActive, cssPosition}) {
+export default function Button({icone, handleClick, isCollection, isActive, indexPosition, btnType, activeCollection}) {
     const yPosition = [-120, 0, 120];
     const [isFadeOut, setIsFadeOut] = useState(0);
 
-    useEffect(() => {
-        if(!isActive) {
-            console.log('achei');
-            setIsFadeOut(true);
-            setTimeout(handleClick, 3000);
-        }
-        return () => setIsFadeOut(0);
-    },[isActive]);
+    // useEffect(() => {
+    //     if(!isActive) {
+    //         console.log('achei');
+    //         setIsFadeOut(true);
+    //         setTimeout(handleClick, 3000);
+    //     }
+    //     return () => setIsFadeOut(0);
+    // },[isActive]);
 
     return(
         <>
-            {!isCollection ? <ButtonWrapper onClick={handleClick}>{icone}</ButtonWrapper>:
-                             <BtnCollectionWrapper onClick={handleClick} $yPosition={yPosition[cssPosition]} $isFadeOut={isFadeOut}>{icone}</BtnCollectionWrapper>}
+            {!isCollection ? <ButtonWrapper onClick={handleClick}  ref={btnType === "collection" ? (e) => activeCollection.current[activeCollection.current.length] = e : null}>{icone}</ButtonWrapper>:
+                             <BtnCollectionWrapper onClick={handleClick} $yPosition={yPosition[indexPosition]} $isFadeOut={isFadeOut}>{icone}</BtnCollectionWrapper>}
             
         </>
     )
@@ -60,5 +60,7 @@ Button.propTypes = {
     handleClick: PropTypes.func,
     isCollection: PropTypes.bool,
     isActive: PropTypes.bool,
-    cssPosition: PropTypes.number
+    indexPosition: PropTypes.number,
+    btnType: PropTypes.string,
+    activeCollection: PropTypes.object
 }

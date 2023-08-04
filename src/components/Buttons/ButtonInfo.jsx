@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Button from "../layout/Button"
 import ButtonCollection from "./ButtonCollection";
@@ -7,11 +7,19 @@ import { FaEllipsis } from 'react-icons/fa6';
 
 export default function ButtonInfo({btnSelect, typeBtnSelect, setIsDisabled}) {
     const [isClicked, setIsClicked] = useState(0);
+    const activeCollection = useRef([]);
 
     const handleClickAdd = () => {
         return console.log("Adicionei uma nova Info na lista")
   
     }
+
+    const handleClickActive = () => {
+        setIsClicked(prevClick => !prevClick);
+        // console.log(activeCollection);
+        // activeCollection.current.map(item => item.click());
+    }
+
 
     const btnInfo = [{btnSelect: "add",
                       icon: <FaPlus/>,
@@ -19,21 +27,21 @@ export default function ButtonInfo({btnSelect, typeBtnSelect, setIsDisabled}) {
                     },
                     {btnSelect: "collection",
                      icon: <FaEllipsis/>,
-                     handleClick: () => setIsClicked(prevClick => !prevClick)}]
+                     handleClick: handleClickActive}]
 
     
 
-    const getBtnInfo = () => {
-      return btnInfo.filter(info => info.btnSelect === btnSelect)[0];
+    const getBtnInfo = (btnCategory) => {
+      return btnInfo.filter(info => info.btnSelect === btnCategory)[0];
 
     }
 
-    const selectedBtnInfo = getBtnInfo();
+    const selectedBtnInfo = getBtnInfo(btnSelect);
 
     return(
         <>
-            <Button icone={selectedBtnInfo.icon} handleClick={selectedBtnInfo.handleClick} isCollection={false}/>
-            {isClicked ? <ButtonCollection typeBtnSelect={typeBtnSelect} setIsDisabled={setIsDisabled} isActive={isClicked}/> : null}
+            <Button icone={selectedBtnInfo.icon} handleClick={selectedBtnInfo.handleClick} isCollection={false} btnType={selectedBtnInfo.btnSelect} activeCollection={activeCollection}/>
+            {isClicked ? <ButtonCollection typeBtnSelect={typeBtnSelect} setIsDisabled={setIsDisabled} isActive={isClicked} activeCollection={activeCollection}/> : null}
             
         </>
     )
