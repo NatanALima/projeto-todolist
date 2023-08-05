@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from "../layout/Button"
 import ButtonCollection from "./ButtonCollection";
@@ -7,7 +7,6 @@ import { FaEllipsis } from 'react-icons/fa6';
 
 export default function ButtonInfo({btnSelect, typeBtnSelect, setIsDisabled}) {
     const [isClicked, setIsClicked] = useState(0);
-    const activeCollection = useRef([]);
 
     const handleClickAdd = () => {
         return console.log("Adicionei uma nova Info na lista")
@@ -16,8 +15,7 @@ export default function ButtonInfo({btnSelect, typeBtnSelect, setIsDisabled}) {
 
     const handleClickActive = () => {
         setIsClicked(prevClick => !prevClick);
-        // console.log(activeCollection);
-        // activeCollection.current.map(item => item.click());
+
     }
 
 
@@ -40,8 +38,8 @@ export default function ButtonInfo({btnSelect, typeBtnSelect, setIsDisabled}) {
 
     return(
         <>
-            <Button icone={selectedBtnInfo.icon} handleClick={selectedBtnInfo.handleClick} isCollection={false} btnType={selectedBtnInfo.btnSelect} activeCollection={activeCollection}/>
-            {isClicked ? <ButtonCollection typeBtnSelect={typeBtnSelect} setIsDisabled={setIsDisabled} isActive={isClicked} activeCollection={activeCollection}/> : null}
+            <Button icone={selectedBtnInfo.icon} handleClick={selectedBtnInfo.handleClick} isCollection={false} btnType={selectedBtnInfo.btnSelect}/>
+            {isClicked ? <ButtonCollection typeBtnSelect={typeBtnSelect} setIsDisabled={setIsDisabled} isActive={isClicked}/> : null}
             
         </>
     )
