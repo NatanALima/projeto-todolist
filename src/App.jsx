@@ -1,5 +1,6 @@
 import { createGlobalStyle, styled } from "styled-components";
 import InputContainer from "./components/layout/InputContainer";
+import { useEffect, useRef } from "react";
 
 const GlobalStyle = createGlobalStyle `
 :root {
@@ -50,17 +51,20 @@ function App() {
   const listNotChecked = ContentSimulator.filter(item => item.isChecked === false);
   const listChecked = ContentSimulator.filter(item => item.isChecked === true);
 
+  const activeCollection = useRef([]);
+
+
   return (
     <>
       <GlobalStyle/>
       <MainContainer>
         <MainTitle>To Do List</MainTitle>
-        {listNotChecked.map(content => <InputContainer key={content.id} type={content.text} placeholder={content.placeholder} disabled={content.disabled} btnSelect={content.btnSelect} btnCollection={content.btnCollection} indexValue={content.id}/>)}
+        {listNotChecked.map(content => <InputContainer key={content.id} type={content.text} placeholder={content.placeholder} disabled={content.disabled} btnSelect={content.btnSelect} btnCollection={content.btnCollection} activeCollection={activeCollection}/>)}
 
         {listChecked.length ? (
           <>
             <ContentTitle>Tarefas Concluídas</ContentTitle>
-            {listChecked.map(content => <InputContainer key={content.id} type={content.text} placeholder={content.placeholder} value={content.value} disabled={content.disabled} btnSelect={content.btnSelect} btnCollection={content.btnCollection} isChecked={content.isChecked} indexValue={content.id }/>)}
+            {listChecked.map(content => <InputContainer key={content.id} type={content.text} placeholder={content.placeholder} value={content.value} disabled={content.disabled} btnSelect={content.btnSelect} btnCollection={content.btnCollection} isChecked={content.isChecked} activeCollection={activeCollection}/>)}
           </>
         ): null}
       </MainContainer>

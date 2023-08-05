@@ -47,7 +47,7 @@ export default function Button({icone, handleClick, isCollection, isActive, inde
 
     return(
         <>
-            {!isCollection ? <ButtonWrapper onClick={handleClick}  ref={btnType === "collection" ? (e) => activeCollection.current[activeCollection.current.length] = e : null}>{icone}</ButtonWrapper>:
+            {!isCollection ? <ButtonWrapper onClick={e => handleClick(e)}  ref={btnType === "collection" ? (isActive ? (e) => activeCollection.current[activeCollection.current.length] = e : null) : null }>{icone}</ButtonWrapper>:
                              <BtnCollectionWrapper onClick={handleClick} $yPosition={yPosition[indexPosition]} $isFadeOut={isFadeOut}>{icone}</BtnCollectionWrapper>}
             
         </>

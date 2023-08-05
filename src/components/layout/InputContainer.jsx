@@ -28,7 +28,7 @@ const InputWrapper = styled.input`
   outline: none; 
 `;
 
-export default function InputContainer({type, value, placeholder, disabled, btnSelect, btnCollection, isChecked}) {
+export default function InputContainer({type, value, placeholder, disabled, btnSelect, btnCollection, isChecked, activeCollection}) {
   const [isDisabled, setIsDisabled] = useState(disabled || false);
 
 
@@ -36,7 +36,7 @@ export default function InputContainer({type, value, placeholder, disabled, btnS
   return(
     <InputContainerWrapper $marginDefine={btnSelect} $isChecked={isChecked}>
       <InputWrapper type={type} value={value} placeholder={placeholder} disabled={isDisabled}/>
-      <ButtonInfo btnSelect={btnSelect} typeBtnSelect={btnCollection} setIsDisabled={setIsDisabled}/>
+      <ButtonInfo btnSelect={btnSelect} typeBtnSelect={btnCollection} setIsDisabled={setIsDisabled} activeCollection={activeCollection}/>
     </InputContainerWrapper>  
   )
 }
@@ -48,5 +48,6 @@ InputContainer.propTypes = {
   disabled: PropTypes.bool,
   btnSelect: PropTypes.string,
   btnCollection: PropTypes.string,
-  isChecked: PropTypes.bool
+  isChecked: PropTypes.bool,
+  activeCollection: PropTypes.object
 }
