@@ -9,7 +9,7 @@ const InputContainerWrapper = styled.div`
   display: flex;
   align-items: center;
   width: 50%;
-  margin: ${props => props.$marginDefine == "add" ? "3em 0" : "1em 0"};
+  margin: ${props => props.$marginDefine == "add" ? "3em 0" : "2em 0"};
   padding: 20px 15px;
   background-color: ${props => props.$isChecked ? "var(--containerCheckedColor)" : "var(--containerColor)"};
   color: var(--fontColor); 
@@ -30,8 +30,6 @@ const InputWrapper = styled.input`
 
 export default function InputContainer({type, value, placeholder, disabled, btnSelect, btnCollection, isChecked}) {
   const [isDisabled, setIsDisabled] = useState(disabled || false);
-
-
   
   return(
     <InputContainerWrapper $marginDefine={btnSelect} $isChecked={isChecked}>

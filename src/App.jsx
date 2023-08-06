@@ -1,5 +1,6 @@
 import { createGlobalStyle, styled } from "styled-components";
 import InputContainer from "./components/layout/InputContainer";
+import { useEffect, useState } from "react";
 
 const GlobalStyle = createGlobalStyle `
 :root {
@@ -41,14 +42,23 @@ const ContentTitle = styled.h2`
 `
 
 function App() {
-  const ContentSimulator = [{id: 1,type: "text", placeholder: "Adicione um novo Texto", value:"", disabled:false, btnSelect: "add", isList: false, isChecked: false},
-                            {id: 2,type: "text", placeholder: "", value:"", disabled:true, btnSelect: "collection", btnCollection: "default", isList: true, isChecked: false},
-                            {id: 3,type: "text", placeholder: "", value:"", disabled:true, btnSelect: "collection", btnCollection: "default", isList: true, isChecked: false},
-                            {id: 4,type: "text", placeholder: "", value:"Qualquer Coisa", disabled: true, btnSelect: "collection", btnCollection: "checkedList", isList: true, isChecked: true},]
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/tasks", {
+      method: "GET",
+      headers: {
+        'Content-Type': 'apllication/json'
+      }
+    })
+    .then(resp => resp.json())
+    .then(data => setTasks(data))
+    .catch(err => console.log(err));
+  },[]);
 
   
-  const listNotChecked = ContentSimulator.filter(item => item.isChecked === false);
-  const listChecked = ContentSimulator.filter(item => item.isChecked === true);
+  const listNotChecked = tasks.filter(item => item.isChecked === false);
+  const listChecked = tasks.filter(item => item.isChecked === true);
 
   return (
     <>
