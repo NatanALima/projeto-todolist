@@ -5,11 +5,18 @@ import ButtonCollection from "./ButtonCollection";
 import { FaPlus } from 'react-icons/fa';
 import { FaEllipsis } from 'react-icons/fa6';
 
-export default function ButtonInfo({btnSelect, typeBtnSelect, setIsDisabled}) {
+export default function ButtonInfo({btnSelect, typeBtnSelect, setIsDisabled, addTask, editTask, taskInfo}) {
     const [isClicked, setIsClicked] = useState(0);
 
     const handleClickAdd = () => {
-        return console.log("Adicionei uma nova Info na lista")
+        if(Object.keys(taskInfo).length > 0) {
+            addTask(taskInfo);
+            alert('Task adicionada com sucesso!');
+            
+
+        } else {
+            alert("É necessário escrever algo para adicionar!");
+        }
   
     }
 
@@ -48,5 +55,8 @@ export default function ButtonInfo({btnSelect, typeBtnSelect, setIsDisabled}) {
 ButtonInfo.propTypes = {
     btnSelect: PropTypes.string,
     typeBtnSelect: PropTypes.string,
-    setIsDisabled: PropTypes.func
+    setIsDisabled: PropTypes.func,
+    addTask: PropTypes.func,
+    editTask: PropTypes.func,
+    taskInfo: PropTypes.object
 }

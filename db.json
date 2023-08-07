@@ -1,6 +1,16 @@
 {
-  "tasks": [{"id": 1,"type": "text", "placeholder": "Adicione um novo Texto", "value":"", "disabled":false, "btnSelect": "add", "isList": false, "isChecked": false},
-  {"id": 2,"type": "text", "placeholder": "", "value":"", "disabled":true, "btnSelect": "collection", "btnCollection": "default", "isList": true, "isChecked": false},
-  {"id": 3,"type": "text", "placeholder": "", "value":"", "disabled":true, "btnSelect": "collection", "btnCollection": "default", "isList": true, "isChecked": false},
-  {"id": 4,"type": "text", "placeholder": "", "value":"Qualquer Coisa", "disabled": true, "btnSelect": "collection", "btnCollection": "checkedList", "isList": true, "isChecked": true}]
+  "tasks": [
+    {
+      "taskValue": "Nova Lista",
+      "btnCollection": "default",
+      "isChecked": false,
+      "id": 1
+    },
+    {
+      "taskValue": "Outra Lista",
+      "btnCollection": "default",
+      "isChecked": false,
+      "id": 2
+    }
+  ]
 }

@@ -3,6 +3,14 @@ import ButtonInfo from '../Buttons/ButtonInfo';
 import { useState } from 'react';
 import { styled } from 'styled-components';
 
+const FormWrapper = styled.form`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+`
 
 const InputContainerWrapper = styled.div`
   position: relative;
@@ -28,23 +36,35 @@ const InputWrapper = styled.input`
   outline: none; 
 `;
 
-export default function InputContainer({type, value, placeholder, disabled, btnSelect, btnCollection, isChecked}) {
+export default function InputContainer({type, value, name, placeholder, disabled, btnSelect, btnCollection, isChecked, addTask, editTask}) {
   const [isDisabled, setIsDisabled] = useState(disabled || false);
+  const [newTask , setNewTask] = useState({});
+
+  const handleTask = (e) => {
+    setNewTask({...newTask, [e.target.name]: e.target.value});
+
+  }
+
   
   return(
+    
     <InputContainerWrapper $marginDefine={btnSelect} $isChecked={isChecked}>
-      <InputWrapper type={type} value={value} placeholder={placeholder} disabled={isDisabled}/>
-      <ButtonInfo btnSelect={btnSelect} typeBtnSelect={btnCollection} setIsDisabled={setIsDisabled}/>
-    </InputContainerWrapper>  
+      <InputWrapper type={type} name={name} defaultValue={value} placeholder={placeholder} disabled={isDisabled} onChange={handleTask} autoComplete='off'/>
+      <ButtonInfo btnSelect={btnSelect} typeBtnSelect={btnCollection} setIsDisabled={setIsDisabled} addTask={addTask} editTask={editTask} taskInfo={newTask}/>
+    </InputContainerWrapper>
+
   )
 }
 
 InputContainer.propTypes = {
   type: PropTypes.string,
   value: PropTypes.string,
+  name: PropTypes.string,
   placeholder: PropTypes.string,
   disabled: PropTypes.bool,
   btnSelect: PropTypes.string,
   btnCollection: PropTypes.string,
-  isChecked: PropTypes.bool
+  isChecked: PropTypes.bool,
+  addTask: PropTypes.func,
+  editTask: PropTypes.func
 }
