@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import ButtonInfo from '../Buttons/ButtonInfo';
 import { useState } from 'react';
 import { styled } from 'styled-components';
+import { fadeIn } from './Animation';
 
 const FormWrapper = styled.form`
   width: 100%;
@@ -13,6 +14,7 @@ const FormWrapper = styled.form`
 `
 
 const InputContainerWrapper = styled.div`
+  opacity: 0;
   position: relative;
   display: flex;
   align-items: center;
@@ -23,6 +25,8 @@ const InputContainerWrapper = styled.div`
   color: var(--fontColor); 
   border-radius: 5px;
   ${props => props.$isChecked ? `text-decoration: line-through;` : null};
+  transition: .3s;
+  animation: ${fadeIn} .4s ease ${props => props.$delayValue ? '.'+props.$delayValue+'s' : null} forwards;
 `; 
 
 const InputWrapper = styled.input`
@@ -36,7 +40,7 @@ const InputWrapper = styled.input`
   outline: none; 
 `;
 
-export default function InputContainer({type, value, name, placeholder, disabled, btnSelect, btnCollection, isChecked, addTask, editTask}) {
+export default function InputContainer({type, value, name, placeholder, disabled, btnSelect, btnCollection, isChecked, indexValue, addTask, editTask}) {
   const [isDisabled, setIsDisabled] = useState(disabled || false);
   const [newTask , setNewTask] = useState({});
 
@@ -48,7 +52,7 @@ export default function InputContainer({type, value, name, placeholder, disabled
   
   return(
     
-    <InputContainerWrapper $marginDefine={btnSelect} $isChecked={isChecked}>
+    <InputContainerWrapper $marginDefine={btnSelect} $isChecked={isChecked} $delayValue={indexValue}>
       <InputWrapper type={type} name={name} defaultValue={value} placeholder={placeholder} disabled={isDisabled} onChange={handleTask} autoComplete='off'/>
       <ButtonInfo btnSelect={btnSelect} typeBtnSelect={btnCollection} setIsDisabled={setIsDisabled} addTask={addTask} editTask={editTask} taskInfo={newTask}/>
     </InputContainerWrapper>
@@ -65,6 +69,7 @@ InputContainer.propTypes = {
   btnSelect: PropTypes.string,
   btnCollection: PropTypes.string,
   isChecked: PropTypes.bool,
+  indexValue: PropTypes.number,
   addTask: PropTypes.func,
   editTask: PropTypes.func
 }

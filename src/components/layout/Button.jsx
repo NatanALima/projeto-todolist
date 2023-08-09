@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import {transitionBtn} from './Animation';
+import {transitionBtn, reverseTransitionBtn} from './Animation';
 import { styled } from 'styled-components';
 import { useEffect, useState } from 'react';
 
@@ -22,19 +22,19 @@ import { useEffect, useState } from 'react';
         }
     `
 
-    // PENDENTE
+    //utilizar o ${props => props.$isFadeOut ? "reverse" : "normal" não funcionou, haja vista que quando a animação passava a ser Reverse ela não agia como deveria}
     const BtnCollectionWrapper = styled(ButtonWrapper)`
         margin: 10px 0;
         position: absolute;
         transition: .3s ease;
-        animation: ${props => (transitionBtn(props.$yPosition+"%"))} ${props => props.$isFadeOut ? "reverse" : "normal"} .3s ease forwards;
+        animation: ${props => (props.$isFadeOut ? reverseTransitionBtn(props.$yPosition+"%") : transitionBtn(props.$yPosition+"%"))} normal .3s ease forwards;
         
     `;
 
     //console.log(ButtonWrapper);
-export default function Button({icone, handleClick, isCollection, isActive, indexPosition, btnType, activeCollection}) {
+export default function Button({icone, handleClick, isCollection, indexPosition, isFadeOut}) {
     const yPosition = [-120, 0, 120];
-    const [isFadeOut, setIsFadeOut] = useState(0);
+    console.log(isFadeOut);
 
     return(
         <>
@@ -50,8 +50,6 @@ Button.propTypes = {
     icone: PropTypes.element,
     handleClick: PropTypes.func,
     isCollection: PropTypes.bool,
-    isActive: PropTypes.bool,
     indexPosition: PropTypes.number,
-    btnType: PropTypes.string,
-    activeCollection: PropTypes.object
+    isFadeOut: PropTypes.bool
 }

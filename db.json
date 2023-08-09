@@ -11,6 +11,12 @@
       "btnCollection": "default",
       "isChecked": false,
       "id": 2
+    },
+    {
+      "taskValue": "Mais uma Lista",
+      "btnCollection": "default",
+      "isChecked": false,
+      "id": 3
     }
   ]
 }

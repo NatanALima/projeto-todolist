@@ -12,7 +12,7 @@ import {FaArrowRotateLeft, FaX} from 'react-icons/fa6';
     `;
     console.log(ContainerBtnWrapper);
 
-export default function ButtonCollection({typeBtnSelect, setIsDisabled, isActive}) {
+export default function ButtonCollection({typeBtnSelect, setIsDisabled, isFadeOut}) {
     const [typeSelect, setTypeSelect] = useState(typeBtnSelect || "default");
 
     const handleClickChecked = () => {
@@ -102,7 +102,7 @@ export default function ButtonCollection({typeBtnSelect, setIsDisabled, isActive
 
     return (
         <ContainerBtnWrapper>
-            {PropsCollection.length ? PropsCollection.map((info, index) => (<Button key={index} {...info} isCollection={true} isActive={isActive} indexPosition={index}/>)) :
+            {PropsCollection.length ? PropsCollection.map((info, index) => (<Button key={index} {...info} isCollection={true} indexPosition={index} isFadeOut={isFadeOut}/>)) :
                 console.log("Não foi possível encontrar a coleção")
             }
             
@@ -114,6 +114,5 @@ export default function ButtonCollection({typeBtnSelect, setIsDisabled, isActive
 ButtonCollection.propTypes = {
     typeBtnSelect: PropTypes.string,
     setIsDisabled: PropTypes.func,
-    isActive: PropTypes.bool,
-
+    isFadeOut: PropTypes.bool
 }
