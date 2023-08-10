@@ -12,16 +12,20 @@ import {FaArrowRotateLeft, FaX} from 'react-icons/fa6';
     `;
     console.log(ContainerBtnWrapper);
 
-export default function ButtonCollection({typeBtnSelect, setIsDisabled, editTask, taskInfo, isFadeOut}) {
+export default function ButtonCollection({typeBtnSelect, setIsDisabled, editTask, delTask, taskInfo, isFadeOut}) {
     const [typeSelect, setTypeSelect] = useState(typeBtnSelect || "default");
 
     const handleClickChecked = () => {
         setIsDisabled(true);
+        taskInfo.isChecked = true;
+        editTask(taskInfo);
+        alert('Tarefa Concluída!');
 
     }
 
     const handleClickDel = () => {
-        return "VIXI! Deletei o conteudo ali!";
+        delTask(taskInfo);
+        alert('Tarefa deletada Com Sucesso!')
 
     }
 
@@ -48,7 +52,10 @@ export default function ButtonCollection({typeBtnSelect, setIsDisabled, editTask
 
     // Botão de remover a tarefa concluida
     const handleClickUnchecked = () => {
-        return "Desfazendo a tarefa";
+        taskInfo.isChecked = false;
+        editTask(taskInfo);
+        alert('Tarefa Desconcluída!');
+
     }
 
     // Nesta função eu verifico qual coleção será utilizada
@@ -116,6 +123,7 @@ ButtonCollection.propTypes = {
     typeBtnSelect: PropTypes.string,
     setIsDisabled: PropTypes.func,
     editTask: PropTypes.func,
+    delTask: PropTypes.func,
     taskInfo: PropTypes.object,
     isFadeOut: PropTypes.bool
 }

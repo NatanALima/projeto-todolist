@@ -5,7 +5,7 @@ import ButtonCollection from "./ButtonCollection";
 import { FaPlus } from 'react-icons/fa';
 import { FaEllipsis } from 'react-icons/fa6';
 
-export default function ButtonInfo({btnSelect, typeBtnSelect, setIsDisabled, addTask, editTask, taskInfo}) {
+export default function ButtonInfo({btnSelect, typeBtnSelect, setIsDisabled, addTask, editTask, delTask, taskInfo}) {
     const [isClicked, setIsClicked] = useState(0);
     const [isFadeOut, setIsFadeOut] = useState(false);
 
@@ -58,7 +58,7 @@ export default function ButtonInfo({btnSelect, typeBtnSelect, setIsDisabled, add
     return(
         <>
             <Button icone={selectedBtnInfo.icon} handleClick={selectedBtnInfo.handleClick} isCollection={false}/>
-            {isClicked ? <ButtonCollection typeBtnSelect={typeBtnSelect} setIsDisabled={setIsDisabled} editTask={editTask} taskInfo={taskInfo} isFadeOut={isFadeOut}/> : null}
+            {isClicked ? <ButtonCollection typeBtnSelect={typeBtnSelect} setIsDisabled={setIsDisabled} editTask={editTask} delTask={delTask} taskInfo={taskInfo} isFadeOut={isFadeOut}/> : null}
             
         </>
     )
@@ -70,5 +70,6 @@ ButtonInfo.propTypes = {
     setIsDisabled: PropTypes.func,
     addTask: PropTypes.func,
     editTask: PropTypes.func,
+    delTask: PropTypes.func,
     taskInfo: PropTypes.object
 }

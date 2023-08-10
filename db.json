@@ -2,19 +2,16 @@
   "tasks": [
     {
       "taskValue": "Nova Lista Alterada De novo",
-      "btnCollection": "default",
       "isChecked": false,
       "id": 1
     },
     {
       "taskValue": "Outra Lista Também Alterada",
-      "btnCollection": "default",
       "isChecked": false,
       "id": 2
     },
     {
-      "taskValue": "Mais uma Lista",
-      "btnCollection": "default",
+      "taskValue": "Esta sim é uma nova Lista",
       "isChecked": false,
       "id": 3
     }
