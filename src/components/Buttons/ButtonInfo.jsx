@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from "../layout/Button"
 import ButtonCollection from "./ButtonCollection";
@@ -8,7 +8,6 @@ import { FaEllipsis } from 'react-icons/fa6';
 export default function ButtonInfo({btnSelect, typeBtnSelect, setIsDisabled, addTask, editTask, taskInfo}) {
     const [isClicked, setIsClicked] = useState(0);
     const [isFadeOut, setIsFadeOut] = useState(false);
-    const clickCurrent = useRef(0);
 
     const handleClickAdd = () => {
         if(Object.keys(taskInfo).length > 0) {
@@ -20,6 +19,11 @@ export default function ButtonInfo({btnSelect, typeBtnSelect, setIsDisabled, add
             alert("É necessário escrever algo para adicionar!");
         }
   
+    }
+
+    const handleClickEdit = () => {
+        editTask(taskInfo);
+        alert('Alteração Realizada com Sucesso!');
     }
 
     // PENDENTE
@@ -59,7 +63,7 @@ export default function ButtonInfo({btnSelect, typeBtnSelect, setIsDisabled, add
     return(
         <>
             <Button icone={selectedBtnInfo.icon} handleClick={selectedBtnInfo.handleClick} isCollection={false}/>
-            {isClicked ? <ButtonCollection typeBtnSelect={typeBtnSelect} setIsDisabled={setIsDisabled} isFadeOut={isFadeOut}/> : null}
+            {isClicked ? <ButtonCollection typeBtnSelect={typeBtnSelect} setIsDisabled={setIsDisabled} handleEdit={handleClickEdit} isFadeOut={isFadeOut}/> : null}
             
         </>
     )

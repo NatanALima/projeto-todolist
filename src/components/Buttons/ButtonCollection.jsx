@@ -12,7 +12,7 @@ import {FaArrowRotateLeft, FaX} from 'react-icons/fa6';
     `;
     console.log(ContainerBtnWrapper);
 
-export default function ButtonCollection({typeBtnSelect, setIsDisabled, isFadeOut}) {
+export default function ButtonCollection({typeBtnSelect, setIsDisabled, handleEdit, isFadeOut}) {
     const [typeSelect, setTypeSelect] = useState(typeBtnSelect || "default");
 
     const handleClickChecked = () => {
@@ -41,7 +41,7 @@ export default function ButtonCollection({typeBtnSelect, setIsDisabled, isFadeOu
     }
 
     const handleClickEditConfirm = () => {
-        return "Confirmei a minha edição :)";
+        handleEdit();
 
     }
 
@@ -114,5 +114,6 @@ export default function ButtonCollection({typeBtnSelect, setIsDisabled, isFadeOu
 ButtonCollection.propTypes = {
     typeBtnSelect: PropTypes.string,
     setIsDisabled: PropTypes.func,
+    handleEdit: PropTypes.func,
     isFadeOut: PropTypes.bool
 }

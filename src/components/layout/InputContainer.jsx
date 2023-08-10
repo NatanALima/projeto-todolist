@@ -4,15 +4,6 @@ import { useState } from 'react';
 import { styled } from 'styled-components';
 import { fadeIn } from './Animation';
 
-const FormWrapper = styled.form`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-`
-
 const InputContainerWrapper = styled.div`
   opacity: 0;
   position: relative;
@@ -37,15 +28,17 @@ const InputWrapper = styled.input`
   font-family: var(--fontStyle);
   background-color: transparent;
   border: none;
-  outline: none; 
+  outline: none;
+  
 `;
 
-export default function InputContainer({type, value, name, placeholder, disabled, btnSelect, btnCollection, isChecked, indexValue, addTask, editTask}) {
+export default function InputContainer({type, value, name, placeholder, disabled, btnSelect, btnCollection, isChecked, indexValue, task, addTask, editTask}) {
   const [isDisabled, setIsDisabled] = useState(disabled || false);
-  const [newTask , setNewTask] = useState({});
+  const [newTask , setNewTask] = useState(task || {});
+  
 
   const handleTask = (e) => {
-    setNewTask({...newTask, [e.target.name]: e.target.value});
+    setNewTask(oldTask => ({...oldTask, [e.target.name]: e.target.value}));
 
   }
 
@@ -70,6 +63,7 @@ InputContainer.propTypes = {
   btnCollection: PropTypes.string,
   isChecked: PropTypes.bool,
   indexValue: PropTypes.number,
+  task: PropTypes.object,
   addTask: PropTypes.func,
   editTask: PropTypes.func
 }

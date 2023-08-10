@@ -43,7 +43,6 @@ const ContentTitle = styled.h2`
 
 function App() {
   const [tasks, setTasks] = useState([]);
-  console.log(tasks);
 
   useEffect(() => {
     fetch("http://localhost:5000/tasks", {
@@ -56,6 +55,8 @@ function App() {
     .then(data => setTasks(data))
     .catch(err => console.log(err));
   },[]);
+
+  
 
   const addTask = (newTask) => {
     newTask.btnCollection = "default";
@@ -82,8 +83,13 @@ function App() {
       body: JSON.stringify(task)
     })
     .then(resp => resp.json())
-    .then(data => setTasks(data))
+    .then(window.location.reload())
     .catch(err => console.log(err));
+  }
+
+  const selectTask = (taskId) => {
+    const taskInfo = tasks.filter(item => item.id === taskId);
+    return taskInfo;
   }
 
   
@@ -95,13 +101,13 @@ function App() {
       <GlobalStyle/>
       <MainContainer>
         <MainTitle>To Do List</MainTitle>
-        <InputContainer type={"text"} name={"taskValue"} placeholder={"Adicione um novo Texto"} btnSelect={"add"} addTask={addTask}/>
-        {listNotChecked.map(content => <InputContainer key={content.id} type={"text"} value={content.taskValue} name={"taskValue"} disabled={true} btnSelect={"collection"} btnCollection={content.btnCollection} indexValue={content.id} addTask={addTask} editTask={editTask}/>)}
+        <InputContainer type={"text"} name={"taskValue"} placeholder={"Adicione um novo Texto"} btnSelect={"add"} selectTask={selectTask} addTask={addTask}/>
+        {listNotChecked.map(content => <InputContainer key={content.id} type={"text"} value={content.taskValue} name={"taskValue"} disabled={true} btnSelect={"collection"} btnCollection={content.btnCollection} indexValue={content.id} task={selectTask(content.id)[0]} addTask={addTask} editTask={editTask}/>)}
 
         {listChecked.length ? (
           <>
             <ContentTitle>Tarefas Concluídas</ContentTitle>
-            {listChecked.map(content => <InputContainer key={content.id} type={"text"} value={content.taskValue} name={"taskValue"} disabled={true} btnSelect={"collection"} btnCollection={content.btnCollection} isChecked={content.isChecked} indexValue={content.id } addTask={addTask} editTask={editTask}/>)}
+            {listChecked.map(content => <InputContainer key={content.id} type={"text"} value={content.taskValue} name={"taskValue"} disabled={true} btnSelect={"collection"} btnCollection={content.btnCollection} isChecked={content.isChecked} indexValue={content.id} task={selectTask(content.id)[0]} addTask={addTask} editTask={editTask}/>)}
           </>
         ): null}
       </MainContainer>

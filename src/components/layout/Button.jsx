@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import {transitionBtn, reverseTransitionBtn} from './Animation';
 import { styled } from 'styled-components';
-import { useEffect, useState } from 'react';
 
     const ButtonWrapper = styled.button`
         display: flex;
@@ -34,7 +33,6 @@ import { useEffect, useState } from 'react';
     //console.log(ButtonWrapper);
 export default function Button({icone, handleClick, isCollection, indexPosition, isFadeOut}) {
     const yPosition = [-120, 0, 120];
-    console.log(isFadeOut);
 
     return(
         <>
