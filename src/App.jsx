@@ -95,7 +95,9 @@ function App() {
   
   const listNotChecked = tasks.filter(item => item.isChecked === false);
   const listChecked = tasks.filter(item => item.isChecked === true);
-
+  
+  //O Aqui haverá três formas diferentes de chamada para o componente InputContainer, sendo o primeiro para adicionar um nova tarefa, o segundo para tarefas pendentes e o terceiro, e último, destinado à tarefas concluídas (checkadas);
+  // Há o uso de dois maps diferentes que percorrem, na qual um deles percorre uma lista de tarefas pendentes e o outro de tarefas concluídas (que só aparecerá quando Houver alguma) 
   return (
     <>
       <GlobalStyle/>

@@ -21,15 +21,10 @@ export default function ButtonInfo({btnSelect, typeBtnSelect, setIsDisabled, add
   
     }
 
-    const handleClickEdit = () => {
-        editTask(taskInfo);
-        alert('Alteração Realizada com Sucesso!');
-    }
-
-    // PENDENTE
+    // Ativa e desativa a coleção de botões de uma lista
     const handleClickActive = () => {
+        // Verifica se a lista está ativa e, caso o usuário decida desativá-la, ou seja, fechá-la, é setado um timer para que essa ação ocorra, para que haja tempo da animação de FadeOut ser realizada
         if(isClicked) {
-            console.log('Entrou aqui ein !');
             setIsFadeOut(true);
             setTimeout(() => {
                 setIsFadeOut(false);
@@ -63,7 +58,7 @@ export default function ButtonInfo({btnSelect, typeBtnSelect, setIsDisabled, add
     return(
         <>
             <Button icone={selectedBtnInfo.icon} handleClick={selectedBtnInfo.handleClick} isCollection={false}/>
-            {isClicked ? <ButtonCollection typeBtnSelect={typeBtnSelect} setIsDisabled={setIsDisabled} handleEdit={handleClickEdit} isFadeOut={isFadeOut}/> : null}
+            {isClicked ? <ButtonCollection typeBtnSelect={typeBtnSelect} setIsDisabled={setIsDisabled} editTask={editTask} taskInfo={taskInfo} isFadeOut={isFadeOut}/> : null}
             
         </>
     )

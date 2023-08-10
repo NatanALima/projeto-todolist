@@ -12,12 +12,12 @@ import {FaArrowRotateLeft, FaX} from 'react-icons/fa6';
     `;
     console.log(ContainerBtnWrapper);
 
-export default function ButtonCollection({typeBtnSelect, setIsDisabled, handleEdit, isFadeOut}) {
+export default function ButtonCollection({typeBtnSelect, setIsDisabled, editTask, taskInfo, isFadeOut}) {
     const [typeSelect, setTypeSelect] = useState(typeBtnSelect || "default");
 
     const handleClickChecked = () => {
         setIsDisabled(true);
-        return "Cliquei no ADD";
+
     }
 
     const handleClickDel = () => {
@@ -28,20 +28,21 @@ export default function ButtonCollection({typeBtnSelect, setIsDisabled, handleEd
     const handleClickReturn = () => {
         setTypeSelect("default");
         setIsDisabled(true);
-        return "Retornando para a coleção selecionada"
 
     }
 
     // Quase todos os botões da coleção de edições
+    // Abre a coleção de Edição
     const handleClickEdit = () => {
         setTypeSelect("editList");
         setIsDisabled(false);
-        return "Cliquei no Edit. Agora um novo menu se abriu";
 
     }
 
+    // Realiza a alteração do texto referente à tarefa
     const handleClickEditConfirm = () => {
-        handleEdit();
+        editTask(taskInfo);
+        alert('Alteração Realizada com Sucesso!');
 
     }
 
@@ -114,6 +115,7 @@ export default function ButtonCollection({typeBtnSelect, setIsDisabled, handleEd
 ButtonCollection.propTypes = {
     typeBtnSelect: PropTypes.string,
     setIsDisabled: PropTypes.func,
-    handleEdit: PropTypes.func,
+    editTask: PropTypes.func,
+    taskInfo: PropTypes.object,
     isFadeOut: PropTypes.bool
 }
