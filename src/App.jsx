@@ -101,13 +101,13 @@ function App() {
       <GlobalStyle/>
       <MainContainer>
         <MainTitle>To Do List</MainTitle>
-        <InputContainer type={"text"} name={"taskValue"} placeholder={"Adicione um novo Texto"} btnSelect={"add"} selectTask={selectTask} addTask={addTask}/>
-        {listNotChecked.map(content => <InputContainer key={content.id} type={"text"} value={content.taskValue} name={"taskValue"} disabled={true} btnSelect={"collection"} btnCollection={content.btnCollection} indexValue={content.id} task={selectTask(content.id)[0]} addTask={addTask} editTask={editTask}/>)}
+        <InputContainer type={"text"} name={"taskValue"} placeholder={"Adicione um novo Texto"} btnSelect={"add"} addTask={addTask} isTask={false}/>
+        {listNotChecked.map(content => <InputContainer key={content.id} type={"text"} value={content.taskValue} name={"taskValue"} disabled={true} btnSelect={"collection"} btnCollection={content.btnCollection} indexValue={content.id} task={selectTask(content.id)[0]} addTask={addTask} editTask={editTask} isTask={true}/>)}
 
         {listChecked.length ? (
           <>
             <ContentTitle>Tarefas Concluídas</ContentTitle>
-            {listChecked.map(content => <InputContainer key={content.id} type={"text"} value={content.taskValue} name={"taskValue"} disabled={true} btnSelect={"collection"} btnCollection={content.btnCollection} isChecked={content.isChecked} indexValue={content.id} task={selectTask(content.id)[0]} addTask={addTask} editTask={editTask}/>)}
+            {listChecked.map(content => <InputContainer key={content.id} type={"text"} value={content.taskValue} name={"taskValue"} disabled={true} btnSelect={"collection"} btnCollection={content.btnCollection} isChecked={content.isChecked} indexValue={content.id} task={selectTask(content.id)[0]} addTask={addTask} editTask={editTask} isTask={true}/>)}
           </>
         ): null}
       </MainContainer>

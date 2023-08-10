@@ -29,10 +29,11 @@ const InputWrapper = styled.input`
   background-color: transparent;
   border: none;
   outline: none;
+  ${props => props.$isTask && !props.disabled ? "border-bottom: 2px solid var(--fontColor)" : null}
   
 `;
 
-export default function InputContainer({type, value, name, placeholder, disabled, btnSelect, btnCollection, isChecked, indexValue, task, addTask, editTask}) {
+export default function InputContainer({type, value, name, placeholder, disabled, btnSelect, btnCollection, isChecked, indexValue, task, addTask, editTask, isTask}) {
   const [isDisabled, setIsDisabled] = useState(disabled || false);
   const [newTask , setNewTask] = useState(task || {});
   
@@ -46,7 +47,7 @@ export default function InputContainer({type, value, name, placeholder, disabled
   return(
     
     <InputContainerWrapper $marginDefine={btnSelect} $isChecked={isChecked} $delayValue={indexValue}>
-      <InputWrapper type={type} name={name} defaultValue={value} placeholder={placeholder} disabled={isDisabled} onChange={handleTask} autoComplete='off'/>
+      <InputWrapper type={type} name={name} defaultValue={value} placeholder={placeholder} disabled={isDisabled} onChange={handleTask} autoComplete='off' $isTask={isTask}/>
       <ButtonInfo btnSelect={btnSelect} typeBtnSelect={btnCollection} setIsDisabled={setIsDisabled} addTask={addTask} editTask={editTask} taskInfo={newTask}/>
     </InputContainerWrapper>
 
@@ -65,5 +66,6 @@ InputContainer.propTypes = {
   indexValue: PropTypes.number,
   task: PropTypes.object,
   addTask: PropTypes.func,
-  editTask: PropTypes.func
+  editTask: PropTypes.func,
+  isTask: PropTypes.bool
 }
