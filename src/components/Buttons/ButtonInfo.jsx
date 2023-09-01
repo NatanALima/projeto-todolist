@@ -5,18 +5,18 @@ import ButtonCollection from "./ButtonCollection";
 import { FaPlus } from 'react-icons/fa';
 import { FaEllipsis } from 'react-icons/fa6';
 
-export default function ButtonInfo({btnSelect, typeBtnSelect, setIsDisabled, addTask, editTask, delTask, taskInfo}) {
+export default function ButtonInfo({btnSelect, typeBtnSelect, setIsDisabled, addTask, editTask, delTask, taskInfo, setInfoModal}) {
     const [isClicked, setIsClicked] = useState(0);
     const [isFadeOut, setIsFadeOut] = useState(false);
 
     const handleClickAdd = () => {
         if(Object.keys(taskInfo).length > 0) {
-            addTask(taskInfo);
-            alert('Task adicionada com sucesso!');
+            setInfoModal({type: "success", info: "Nova Lista Adicionada com Sucesso!"});
+            addTask(taskInfo); 
             
 
         } else {
-            alert("É necessário escrever algo para adicionar!");
+            setInfoModal({type: "error", info: "É necessário escrever algo para adicionar!"});
         }
   
     }
@@ -58,7 +58,7 @@ export default function ButtonInfo({btnSelect, typeBtnSelect, setIsDisabled, add
     return(
         <>
             <Button icone={selectedBtnInfo.icon} handleClick={selectedBtnInfo.handleClick} isCollection={false}/>
-            {isClicked ? <ButtonCollection typeBtnSelect={typeBtnSelect} setIsDisabled={setIsDisabled} editTask={editTask} delTask={delTask} taskInfo={taskInfo} isFadeOut={isFadeOut}/> : null}
+            {isClicked ? <ButtonCollection typeBtnSelect={typeBtnSelect} setIsDisabled={setIsDisabled} editTask={editTask} delTask={delTask} taskInfo={taskInfo} isFadeOut={isFadeOut} setInfoModal={setInfoModal}/> : null}
             
         </>
     )
@@ -71,5 +71,6 @@ ButtonInfo.propTypes = {
     addTask: PropTypes.func,
     editTask: PropTypes.func,
     delTask: PropTypes.func,
-    taskInfo: PropTypes.object
+    taskInfo: PropTypes.object,
+    setInfoModal: PropTypes.func
 }

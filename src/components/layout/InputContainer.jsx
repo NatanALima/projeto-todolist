@@ -25,7 +25,7 @@ const InputWrapper = styled.input`
   margin: 0 15px;
   color: var(--fontColor);
   font-size: 22px;
-  font-family: var(--fontStyle);
+  font-family: var(--fontPrimary);
   background-color: transparent;
   border: none;
   outline: none;
@@ -33,7 +33,7 @@ const InputWrapper = styled.input`
   
 `;
 
-export default function InputContainer({type, value, name, placeholder, disabled, btnSelect, btnCollection, isChecked, indexValue, task, addTask, editTask, delTask, isTask}) {
+export default function InputContainer({type, value, name, placeholder, disabled, btnSelect, btnCollection, isChecked, indexValue, task, addTask, editTask, delTask, isTask, setInfoModal}) {
   const [isDisabled, setIsDisabled] = useState(disabled || false);
   const [newTask , setNewTask] = useState(task || {});
   
@@ -48,7 +48,7 @@ export default function InputContainer({type, value, name, placeholder, disabled
     
     <InputContainerWrapper $marginDefine={btnSelect} $isChecked={isChecked} $delayValue={indexValue}>
       <InputWrapper type={type} name={name} defaultValue={value} placeholder={placeholder} disabled={isDisabled} onChange={handleTask} autoComplete='off' $isTask={isTask}/>
-      <ButtonInfo btnSelect={btnSelect} typeBtnSelect={btnCollection} setIsDisabled={setIsDisabled} addTask={addTask} editTask={editTask} delTask={delTask} taskInfo={newTask}/>
+      <ButtonInfo btnSelect={btnSelect} typeBtnSelect={btnCollection} setIsDisabled={setIsDisabled} addTask={addTask} editTask={editTask} delTask={delTask} taskInfo={newTask} setInfoModal={setInfoModal}/>
     </InputContainerWrapper>
 
   )
@@ -68,5 +68,6 @@ InputContainer.propTypes = {
   addTask: PropTypes.func,
   editTask: PropTypes.func,
   delTask: PropTypes.func,
-  isTask: PropTypes.bool
+  isTask: PropTypes.bool,
+  setInfoModal: PropTypes.func
 }

@@ -2,11 +2,11 @@ import { keyframes } from 'styled-components';
 
 export const rotate = keyframes`
     from {
-    transform: rotate(0deg);
+        transform: rotate(0deg);
     }
 
     to {
-    transform: rotate(360deg);
+        transform: rotate(360deg);
     }
 `;
 
@@ -49,4 +49,13 @@ export const fadeIn = keyframes`
         opacity: 1;
     }
 
+`
+
+export const upDownAnim = keyframes`
+    from {
+        top: -50%;
+    
+    } to {
+        top: 5%;
+    }
 `

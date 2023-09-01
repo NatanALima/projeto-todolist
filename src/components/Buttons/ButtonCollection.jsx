@@ -12,20 +12,20 @@ import {FaArrowRotateLeft, FaX} from 'react-icons/fa6';
     `;
     console.log(ContainerBtnWrapper);
 
-export default function ButtonCollection({typeBtnSelect, setIsDisabled, editTask, delTask, taskInfo, isFadeOut}) {
+export default function ButtonCollection({typeBtnSelect, setIsDisabled, editTask, delTask, taskInfo, isFadeOut, setInfoModal}) {
     const [typeSelect, setTypeSelect] = useState(typeBtnSelect || "default");
 
     const handleClickChecked = () => {
         setIsDisabled(true);
         taskInfo.isChecked = true;
         editTask(taskInfo);
-        alert('Tarefa Concluída!');
+        setInfoModal({type: "success", info: "Tarefa Concluída!"});
 
     }
 
     const handleClickDel = () => {
         delTask(taskInfo);
-        alert('Tarefa deletada Com Sucesso!')
+        setInfoModal({type: "success", info: "Tarefa Deletada com Sucesso!"});
 
     }
 
@@ -46,7 +46,7 @@ export default function ButtonCollection({typeBtnSelect, setIsDisabled, editTask
     // Realiza a alteração do texto referente à tarefa
     const handleClickEditConfirm = () => {
         editTask(taskInfo);
-        alert('Alteração Realizada com Sucesso!');
+        setInfoModal({type: "success", info: "Alteração Realizada com Sucesso!"});
 
     }
 
@@ -54,7 +54,7 @@ export default function ButtonCollection({typeBtnSelect, setIsDisabled, editTask
     const handleClickUnchecked = () => {
         taskInfo.isChecked = false;
         editTask(taskInfo);
-        alert('Tarefa Desconcluída!');
+        setInfoModal({type: "success", info: "Tarefa Desconcluída!"});
 
     }
 
@@ -125,5 +125,7 @@ ButtonCollection.propTypes = {
     editTask: PropTypes.func,
     delTask: PropTypes.func,
     taskInfo: PropTypes.object,
-    isFadeOut: PropTypes.bool
+    isFadeOut: PropTypes.bool,
+    setInfoModal: PropTypes.func,
+
 }
